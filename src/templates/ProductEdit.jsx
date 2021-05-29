@@ -1,9 +1,8 @@
 import {useCallback, useState} from 'react'
 import {TextInput, SelectBox, PrimaryButton} from "../components/UIkit";
-import {signUp} from "../reducks/users/operations";
+import {ImageArea} from "../components/Products";
 import {useDispatch} from "react-redux";
 import {saveProduct} from "../reducks/products/operations";
-
 const ProductEdit = () => {
 
   const dispatch = useDispatch()
@@ -12,7 +11,8 @@ const ProductEdit = () => {
     [description, setDescription] = useState(''),
     [price, setPrice] = useState(''),
     [category, setCategory] = useState(''),
-    [gender, setGender] = useState('')
+    [gender, setGender] = useState(''),
+    [images, setImages] = useState([])
 
   const inputName = useCallback((e) => {
     setName(e.target.value)
@@ -25,10 +25,6 @@ const ProductEdit = () => {
   const inputPrice = useCallback((e) => {
     setPrice(e.target.value)
   }, [setPrice])
-
-  const inputGender = useCallback((e) => {
-    setGender(e.target.value)
-  }, [setGender])
 
   const categories = [
     {
@@ -55,6 +51,7 @@ const ProductEdit = () => {
     <section>
       <h2 className="u-text__headline u-text-center">商品の登録・編集</h2>
       <div className="c-section-container">
+        <ImageArea images={images} setImages={setImages} />
         <TextInput fullWidth={true} label={'商品名'} multiline={false} required={true}
                    rows={1} value={name} type={'text'} onChange={inputName}
         />
@@ -72,7 +69,7 @@ const ProductEdit = () => {
         />
         <div className="module-spacer--medium" />
         <div className={'center'}>
-          <PrimaryButton label={'商品追加'} onClick={() => dispatch(saveProduct(category, description, gender, name, price))} />
+          <PrimaryButton label={'商品追加'} onClick={() => dispatch(saveProduct(category, description, gender, images, name, price))} />
         </div>
       </div>
     </section>
