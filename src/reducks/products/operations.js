@@ -2,13 +2,14 @@ import {db, FirebaseTimestamp} from "../../firebase";
 import {push} from 'connected-react-router'
 const productsRef = db.collection('products')
 
-export const saveProduct = (category, description, gender, name, price) => {
+export const saveProduct = (category, description, gender, images, name, price) => {
   return async (dispatch) => {
     const timestamp = FirebaseTimestamp.now()
     const data = {
       category,
       description,
       gender,
+      images,
       name,
       price: parseInt(price, 10),
       updated_at: timestamp
