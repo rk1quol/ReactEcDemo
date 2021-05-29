@@ -1,18 +1,27 @@
-import {useCallback, useState} from 'react'
+import {useCallback, useState, useEffect} from 'react'
 import {TextInput, SelectBox, PrimaryButton} from "../components/UIkit";
 import {ImageArea} from "../components/Products";
+import {SetSizeArea} from "../components/Products";
 import {useDispatch} from "react-redux";
+import {db} from "../firebase";
 import {saveProduct} from "../reducks/products/operations";
+
 const ProductEdit = () => {
 
   const dispatch = useDispatch()
+
+  let id = window.location.pathname.split('/product/edit')[1]
+  if (id !== '') {
+    id = id.split('/')[1]
+  }
 
   const [name, setName] = useState(''),
     [description, setDescription] = useState(''),
     [price, setPrice] = useState(''),
     [category, setCategory] = useState(''),
     [gender, setGender] = useState(''),
-    [images, setImages] = useState([])
+    [images, setImages] = useState([]),
+    [sizes, setSizes] = useState([])
 
   const inputName = useCallback((e) => {
     setName(e.target.value)
@@ -47,6 +56,22 @@ const ProductEdit = () => {
     {id: 'female', name: 'レディース',},
   ]
 
+  useEffect(() => {
+    if (id !== '') {
+      db.collection('products').doc(id).get()
+        .then(snapshot => {
+          const product = snapshot.data()
+          setName(product.name)
+          setDescription(product.description)
+          setPrice(product.price)
+          setCategory(product.category)
+          setGender(product.gender)
+          setImages(product.images)
+          setSizes(product.sizes)
+        })
+    }
+  }, [id])
+
   return (
     <section>
       <h2 className="u-text__headline u-text-center">商品の登録・編集</h2>
@@ -67,9 +92,11 @@ const ProductEdit = () => {
         <TextInput fullWidth={true} label={'価格'} multiline={false} required={true}
                    rows={1} value={price} type={'number'} onChange={inputPrice}
         />
-        <div className="module-spacer--medium" />
+        <div className="module-spacer--small" />
+        <SetSizeArea sizes={sizes} setSizes={setSizes} />
+        <div className="module-spacer--small" />
         <div className={'center'}>
-          <PrimaryButton label={'商品追加'} onClick={() => dispatch(saveProduct(category, description, gender, images, name, price))} />
+          <PrimaryButton label={'商品情報を保存'} onClick={() => dispatch(saveProduct(id, category, description, gender, images, name, price, sizes))} />
         </div>
       </div>
     </section>
