@@ -17,7 +17,7 @@ const HeaderMenus = (props) => {
       <IconButton>
         <FavoriteBorderIcon />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={(e) => props.handleDrawerToggle(e)}>
         <MenuIcon />
       </IconButton>
     </>
