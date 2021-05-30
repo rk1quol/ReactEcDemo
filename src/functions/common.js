@@ -1,5 +1,7 @@
+import HTMLReactParser from "html-react-parser/index";
+
 export const isValidEmailFormat = (email) => {
-  const regex = /^\w+[\w\.]*\w+@\w+[\w\.]*\.\w+[\w\.]*[A-Za-z]+$/i
+  const regex = /^\w+[\w.]*\w+@\w+[\w.]*\.\w+[\w.]*[A-Za-z]+$/i
   return regex.test(email)
 }
 
@@ -11,4 +13,12 @@ export const isValidRequiredInput = (...args) => {
     }
   }
   return validator
+}
+
+export const returnCodeToBr = (sentence) => {
+  if (sentence === '') {
+    return sentence
+  } else {
+    return HTMLReactParser(sentence.replace(/\r?\n/g, '<br/>'))
+  }
 }
