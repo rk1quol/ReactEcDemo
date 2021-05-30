@@ -1,5 +1,4 @@
 import React, {useCallback} from 'react'
-import {useDispatch} from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import ImagePreview from "./ImagePreview";
@@ -14,8 +13,6 @@ const useStyles = makeStyles({
 })
 
 const ImageArea = (props) => {
-  const dispatch = useDispatch()
-
   const uploadImage = useCallback((e) => {
     const file = e.target.files
     let blob = new Blob(file, { type: 'image/jpeg' })
