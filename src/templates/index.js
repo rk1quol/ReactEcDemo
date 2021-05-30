@@ -1,5 +1,6 @@
 export { default as Home } from './Home'
 export { default as ProductEdit } from './ProductEdit'
+export { default as ProductDetail } from './ProductDetail'
 export { default as ProductList } from './ProductList'
 
 export { default as SignUp } from './SignUp'
