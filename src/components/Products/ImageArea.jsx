@@ -63,7 +63,9 @@ const ImageArea = (props) => {
         <label htmlFor="image">
           商品画像を登録する
           <IconButton className={classes.icon}>
-            <AddPhotoAlternateIcon />
+            <label htmlFor="image">
+              <AddPhotoAlternateIcon />
+            </label>
             <input
               type="file"
               id="image"

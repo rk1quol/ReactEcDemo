@@ -1,15 +1,15 @@
-export const ADD = 'ADD'
-export const INDEX = 'INDEX'
-
-export const indexAction = (context) => {
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS'
+export const fetchProductsAction = (products) => {
   return {
-    type: 'INDEX',
-    payload: {
-      name: context.name,
-      description: context.description,
-      price: context.price,
-      category: context.category,
-      gender: context.gender,
-    }
+    type: 'FETCH_PRODUCTS',
+    payload: products
+  }
+}
+
+export const DELETE_PRODUCTS = 'DELETE_PRODUCTS'
+export const deleteProductsAction = (products) => {
+  return {
+    type: 'DELETE_PRODUCTS',
+    payload: products
   }
 }
