@@ -73,7 +73,7 @@ const ProductCard = (props) => {
             {props.product.name}
           </Typography>
           <Typography component="p" className={classes.price}>
-            ¥{price}
+            &#165;{price}
           </Typography>
         </div>
         <IconButton onClick={handleClick}>

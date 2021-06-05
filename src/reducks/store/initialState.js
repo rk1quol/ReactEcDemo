@@ -7,7 +7,9 @@ const initialState = {
     role: '',
     uid: '',
     username: '',
-  }
+    cart: [],
+  },
+
 }
 
 export default initialState
