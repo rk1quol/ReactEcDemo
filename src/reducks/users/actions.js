@@ -1,5 +1,6 @@
 export const SIGN_IN = 'SIGN_IN'
 export const SIGN_OUT = 'SIGN_OUT'
+export const FETCH_PRODUCTS_IN_CART = 'FETCH_PRODUCTS_IN_CART'
 
 export const signInAction = (userState) => {
   return {
@@ -22,5 +23,12 @@ export const signOutAction = () => {
       uid: '',
       username: ''
     }
+  }
+}
+
+export const fetchProductsInCartAction = (carts) => {
+  return {
+    type: 'FETCH_PRODUCTS_IN_CART',
+    payload: carts,
   }
 }
