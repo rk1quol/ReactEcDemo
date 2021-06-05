@@ -11,6 +11,12 @@ export const UsersReducer = (state = initialState.users, action) => {
 
     case Actions.SIGN_OUT:
       return action.payload
+
+    case Actions.FETCH_PRODUCTS_IN_CART:
+      return {
+        ...state,
+        cart: [...action.payload],
+      }
     default:
       return state
   }
