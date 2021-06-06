@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
@@ -8,6 +8,7 @@ import {makeStyles} from "@material-ui/styles";
 import {useDispatch, useSelector} from "react-redux";
 import {getProductsInCart, getUserId} from "../../reducks/users/selectors";
 import {fetchProductsInCart} from "../../reducks/users/operations";
+import {push} from 'connected-react-router'
 import {db} from "../../firebase";
 
 const HeaderMenus = (props) => {
@@ -46,11 +47,15 @@ const HeaderMenus = (props) => {
     return () => unsubscribe()
   }, [])
 
+  const goToCart = useCallback(() => {
+    dispatch(push('/cart'))
+  },[])
+
   return (
     <>
       <IconButton>
         <Badge badgeContent={carts.length} color="secondary">
-          <ShoppingCartIcon />
+          <ShoppingCartIcon onClick={goToCart} />
         </Badge>
       </IconButton>
       <IconButton>
